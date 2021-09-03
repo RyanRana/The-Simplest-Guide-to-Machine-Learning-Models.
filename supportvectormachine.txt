@@ -1,0 +1,108 @@
+
+Photo by Paulo Silva on Unsplash
+Support Vector Machines(SVM) are one the most frequently used machine learning models, and definitely essential for any ML developer's toolkit. The goal of this article isn’t just to simply teach you what SVM’s are but also how to build one with python.
+What is an SVM?
+An SVM is a supervised learning model used mainly for classification problems. We are going to use this model to classify 5 different species of flowers.
+SVM’s incorporate similar ideas as linear regression, so if you aren’t already familiar with that I recommend checking out the linked article.
+The Concept
+The concept of SVM is that it takes in a series of classified data points and tries to find a line that separates the data points in the best way possible.
+For example, let's say this is the data you are given,
+
+Fig 1
+Now the SVM model creates a line that separates the data. It would look something like this,
+
+Fig 2
+This is obvious to us, but for a computer, this is phenomenal work. The SVM model has to create a perfect line not only that it fits the classified data but also most likely on new data. For example, the line could look like this,
+
+Fig 3
+Is this accurate? Well yea, but the first line fits the general data better so that if there are new points it would be more likely to classify it correctly. That's what makes SVM so powerful.
+How does an SVM work?
+Margins
+To separate the two classes of data points, there are many possible hyperplanes that could be chosen. Our objective is to find a plane that has the maximum margin, i.e the maximum distance between data points of both classes. Maximizing the margin distance provides some reinforcement so that future data points can be classified with more confidence.
+
+Fig 4
+The green line is in the dead center between the closest pink and closest blue data points. That's led to the best possible margin because it gives most leeway for new data points to be classified correctly.
+Hyperplane
+The proper term for the green line is called a hyperplane. The dimension of the hyperplane depends upon the number of features. If the number of input features is 2, then the hyperplane is just a line. If the number of input features is 3, then the hyperplane becomes a two-dimensional plane.
+
+Equation of a hyperplane, where x all the dots making up a line.
+
+The dots above the line.
+
+The dots below the line.
+Essentially if the data is above or below the line it will be classified as such. The entire coordinate plane is squashed that to just 0 to 1 by using just the sigmoid function. This just makes it easier to do the computations.
+
+Data that isn’t linearly separable
+However, what is important to note is an error that could occur within an SVM problem. What if the data is not linearly separable? In the previous chart, there was a clear indication of possible lines for separation. For example, take a look at this chart.
+
+Fig 5
+In this chart, there is not a possible line to separate the data, you would need a circle-like structure to separate the data, this isn’t possible with an SVM algorithm. So how do we combat this? We add a dimension (a new feature). In the graph in Fig 5, there are x and y coordinates, so let's add a z coordinate. If we add a Z coordinate the equation goes to Z = X²+ Y², this turns Fig 5 into a 3D graph. Then a 2D hyperplane can cut the model. This is called the Kernel method.
+Computer Vision
+Now that we have a solid understanding of SVM, let's move onto our implementation part. As stated before we are going to be classifying different types of flowers by looking at different images of flowers. In order to do this project, you need to understand how computers actually view images.
+Unlike computers, humans have developed over millions of years to be able to view an image without thinking much about it.
+
+Fig 6
+Computers on the other hand see an array of values that represent colored pixels on a screen.
+
+Fig 7
+With that said we can actually start working on the code.
+
+Photo by Sergey Shmidt on Unsplash
+Steps to Complete a Machine Learning Project
+To implement SVM into Python we just need to follow the general process of machine learning. If you have never done an ML project before I recommend reading this article. It goes over the essential steps in making a machine learning project. In summary, the steps required are as follows,
+Identify the Problem
+Data Collection
+Data Cleaning
+Building a Model
+Prediction
+We have already identified the problem we are going to complete (classifying images of flowers). So let's move onto the next step.
+Btw, we are not going hand
+Data Collection
+We will be using the following dataset from Kaggle. This folder called flowers has five subfolders that are categorized by the classification of flowers(these will be the labels in our code).
+Sometimes in other datasets, the data needs to be cleaned to remove nulls, outlying data, and dummy rows. We don’t need to do any of that because we are dealing with images that have been properly classified.
+
+Fig 8
+Import Libraries
+We have to import six libraries just to prep the data in the code, they are as follows.
+Pandas: A tool for handling, analyzing, and processing data.
+Os: A tool for looking into a computer operating system.
+Skimage.io: A tool to read and process images.
+Skimage.transform: A tool to resize the images for our benefit.
+Numpy: A tool for handling the mathematics of data.
+Matplotlib: A tool for plotting visuals(images and data).
+
+Setting up inputs and outputs
+We now have set up variables in our code for both inputs and outputs. We do this by listing our labels as a list, two empty arrays, and the path to our data.
+
+Then we have to loop through each of the categories and pull all the images from the path.
+
+From here we have to loop through all the images within the selected path and tailor the size of our image and add it to the previously empty arrays. After the nested loop is completed the whole thing can be joined into simple x and y variables.
+
+Building a Model
+Now we actually have to construct our model, for this part we will use sklearn. It is a collection of algorithms and models that make making models so much easier. We will use this library to build our SVM.
+
+Training
+We now have to train our model, but first, we have to split the data into training and testing. If you didn’t read the ML article, training is basically fitting a model so that it will come up with a series of calculations and algorithms specific to your model and data. In this case, it is coming up with the optimal hyperplane.
+
+Now it's time to fit the model for our data.
+
+Testing
+Now it's time to score the accuracy of our model by taking the testing data and making predictions about it. You can’t test and train on the same data because it will always be 100% accurate because the model has been perfected for that specific data. The testing sets offer something else. The accuracy will be displayed by calculating how many classifications were correct and incorrect and dividing that by the total.
+
+Prediction
+You’ve done the work, you’ve learned the concepts, you’ve collected the data, built a model, trained it, tested it, and now it's time to use it. Using the following code will classify any image you give it. The whole thing is pretty self-explanatory since you’ve made it this far!
+
+Conclusion
+In conclusion, we have broken down the theory of SVM and built a flower classification model in return.
+Source Code → https://github.com/RyanRana/SVM-Flower-Classification
+Good Luck with all your coding endeavors!
+
+Photo by Brandon Jacoby on Unsplash
+Works Cited
+“1.4. Support Vector Machines¶.” Scikit, scikit-learn.org/stable/modules/svm.html.
+“1.4. Support Vector Machines¶.” Scikit, scikit-learn.org/stable/modules/svm.html#classification.
+MLMath.io. “Math behind Support Vector Machine(SVM).” Medium, Medium, 16 Feb. 2019, ankitnitjsr13.medium.com/math-behind-support-vector-machine-svm-5e7376d0ee4d.
+Shanmukh, Vegi. “Image Classification Using Machine Learning-Support Vector Machine(SVM).” Medium, Analytics Vidhya, 5 Mar. 2021, medium.com/analytics-vidhya/image-classification-using-machine-learning-support-vector-machine-svm-dc7a0ec92e01.
+Sunil Ray
+I am a Business Analytics and Intelligence professional with deep experience in the Indian Insurance industry. I have worked for various multi-national Insurance companies in last 7 years. “SVM: Support Vector Machine Algorithm in Machine Learning.” Analytics Vidhya, 23 July 2021, www.analyticsvidhya.com/blog/2017/09/understaing-support-vector-machine-example-code/.
+“Support Vector Machines: A Simple Explanation.” KDnuggets, www.kdnuggets.com/2016/07/support-vector-machines-simple-explanation.html.
